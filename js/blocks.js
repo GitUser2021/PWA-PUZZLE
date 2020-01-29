@@ -49,8 +49,8 @@ function start(show) {
     function Bloque() {
         this.bloque = null,        // referencia al objeto.
             this.status = false,   // status true habilita el movimiento.
-            this.position = null,  // indica la posicion del 1 al 9.
-            // posiciona el div en el lugar correspondiente a position.
+            this.position = null,  // indica la posicion de los bloques.
+            // posiciona el bloque en el lugar correspondiente a position.
             this.Move = () => {
                 this.bloque.style.top = blocksPositions[this.position].top + 'px'
                 this.bloque.style.left = blocksPositions[this.position].left + 'px'
@@ -58,17 +58,17 @@ function start(show) {
     }
 
 
-    // creo los 9 bloques
+    // creo los bloques.
     for (var i = 1; i < (CANT_BLOQUES + 1); i++) {
         window['div' + i] = new Bloque
         window['div' + i].bloque = document.getElementById(i)   // aplico un div a cada nuevo bloque.
-        window['div' + i].position = i // aplico las posiciones por orden del 1 al 9.
+        window['div' + i].position = i // aplico las posiciones por orden del primero al ultimo.
         objArray.push(window['div' + i])
     }
 
     ref_div_main.children[CANT_BLOQUES - 1].style.display = 'none'
 
-    // agrego los addEventListener a los divs MENOS AL bloque vacio.
+    // agrego los addEventListener a los todos los bloques MENOS AL bloque vacio.
     for (var i = 1; i < CANT_BLOQUES; i++) {
         document.getElementById(i).addEventListener('touchstart', function (e) {
             move(e.target.id)
