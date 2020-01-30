@@ -17,11 +17,6 @@ if (window.screen.orientation.angle == 0) {
     image_size = window.screen.height
 }
 
-// calcula la cant. de bloques totales.
-function cant_bloques() {
-    return cant_bloques = puzzle_size * puzzle_size
-}
-
 // mostrar imagen como ayuda.
 function show_image(show) {
     if (show) {
@@ -63,7 +58,7 @@ document.getElementById('btnHelp').addEventListener('touchend', () => {
 document.getElementById('level_size_3').addEventListener('touchstart', () => {
     reset()
     puzzle_size = 3
-    cant_bloques()
+    cant_bloques = puzzle_size * puzzle_size
     start('show') // show para que solo muestre la imagen, y no se creen los bloques y habiliten los movimientos.
 })
 
@@ -71,7 +66,7 @@ document.getElementById('level_size_3').addEventListener('touchstart', () => {
 document.getElementById('level_size_4').addEventListener('touchstart', () => {
     reset()
     puzzle_size = 4
-    cant_bloques()
+    cant_bloques = puzzle_size * puzzle_size
     start('show') // show para que solo muestre la imagen, y no se creen los bloques y habiliten los movimientos.
 })
 
@@ -79,7 +74,7 @@ document.getElementById('level_size_4').addEventListener('touchstart', () => {
 document.getElementById('level_size_5').addEventListener('touchstart', () => {
     reset()
     puzzle_size = 5
-    cant_bloques()
+    cant_bloques = puzzle_size * puzzle_size
     start('show') // show para que solo muestre la imagen, y no se creen los bloques y habiliten los movimientos.
 })
 
@@ -87,7 +82,7 @@ document.getElementById('level_size_5').addEventListener('touchstart', () => {
 document.getElementById('level_size_6').addEventListener('touchstart', () => {
     reset()
     puzzle_size = 6
-    cant_bloques()
+    cant_bloques = puzzle_size * puzzle_size
     start('show') // show para que solo muestre la imagen, y no se creen los bloques y habiliten los movimientos.
 })
 
