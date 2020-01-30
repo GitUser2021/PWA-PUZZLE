@@ -19,9 +19,15 @@ let ref_level_size_6 = document.getElementById('level_size_6')
 
 // el tamaño de la imagen es el tamaño de pantalla.
 if (window.screen.orientation.angle == 0) {
-    image_size = window.screen.width
+    if (window.innerWidth >= 800) {
+        image_size = 500
+    } else {
+        image_size = window.innerWidth
+    }
+    // image_size = window.screen.width
 } else {
-    image_size = window.screen.height
+    image_size = window.innerHeight
+    // image_size = window.screen.height
 }
 
 // mostrar imagen como ayuda.
