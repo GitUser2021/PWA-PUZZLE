@@ -92,7 +92,10 @@ function start(show) {
     init()
     if (show) {
         disable_blocks()
+        document.getElementById('btnHelp').style.display = 'none' // oculto el boton HELP.
         window['div' + cant_bloques].bloque.style.display = 'block'
+    } else {
+        document.getElementById('btnHelp').style.display = 'block' // muestro el boton HELP.
     }
 }
 // inicializa todos los bloques (imagen completa),
