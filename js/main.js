@@ -1,13 +1,20 @@
 const IMAGE = 'url(css/images/tigre.jpeg)'
 const SOUND_WIN = 'css/sounds/clap.mp3'
+
 let image_size = 360
 let puzzle_size = 3
 let cant_bloques = puzzle_size * puzzle_size
+
 let blocksPositions = {} // obj para almacenar las posisiones de los bloques.
 let objArray = [] // un array con todos los bloques para usar en la funcion update_status()
-let ref_div_main = document.getElementById('main')
 let last_row_index = []
 let first_row_index = []
+
+let ref_div_main = document.getElementById('main')
+let ref_level_size_3 = document.getElementById('level_size_3')
+let ref_level_size_4 = document.getElementById('level_size_4')
+let ref_level_size_5 = document.getElementById('level_size_5')
+let ref_level_size_6 = document.getElementById('level_size_6')
 
 
 // el tamaño de la imagen es el tamaño de pantalla.
@@ -39,7 +46,7 @@ function show_image(show) {
 
 // boton New Game.
 document.getElementById('btnNewGame').addEventListener('click', () => {
-    pregunta(puzzle_size,true)
+    pregunta(puzzle_size, true)
 })
 
 // boton Help.
@@ -71,7 +78,7 @@ document.getElementById('level_size_6').addEventListener('click', () => {
 })
 
 // juego nuevo.
-function new_game(){
+function new_game() {
     reset()
     start()
     setTimeout(() => {
@@ -82,18 +89,50 @@ function new_game(){
 
 
 // seleccion de nivel.
-function level(size){
+function level(size) {
+    dim_level_item(size)
     reset()
     puzzle_size = size
     cant_bloques = puzzle_size * puzzle_size
     start('show') // show para que solo muestre la imagen, y no se creen los bloques y habiliten los movimientos.
 }
 
+// dim level option
+// cambia el color de los selectores de nivel, menos el clickeado.
+function dim_level_item(level) {
+    switch (level) {
+        case 3:
+            ref_level_size_3.style.background = 'salmon'
+            ref_level_size_4.style.background = 'gray'
+            ref_level_size_5.style.background = 'gray'
+            ref_level_size_6.style.background = 'gray'
+            break
+        case 4:
+            ref_level_size_4.style.background = 'salmon'
+            ref_level_size_3.style.background = 'gray'
+            ref_level_size_5.style.background = 'gray'
+            ref_level_size_6.style.background = 'gray'
+            break
+        case 5:
+            ref_level_size_5.style.background = 'salmon'
+            ref_level_size_3.style.background = 'gray'
+            ref_level_size_4.style.background = 'gray'
+            ref_level_size_6.style.background = 'gray'
+            break
+        case 6:
+            ref_level_size_6.style.background = 'salmon'
+            ref_level_size_3.style.background = 'gray'
+            ref_level_size_4.style.background = 'gray'
+            ref_level_size_5.style.background = 'gray'
+            break
+    }
+}
+
 // SweetAlert2 pregunta.
-function pregunta(size,newGame = false){
+function pregunta(size, newGame = false) {
     // num indica si se jugo previamente, ya que se genera en scramble().
     // si se jugo previamente, realizo la pregunta.
-    if(num){
+    if (num) {
         Swal.fire({
             title: 'Cancelar juego?',
             text: "",
@@ -108,8 +147,8 @@ function pregunta(size,newGame = false){
                 num = false // reset de la variable.
             }
         })
-    }else{
-        if(newGame){
+    } else {
+        if (newGame) {
             new_game()
             return
         }

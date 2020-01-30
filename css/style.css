@@ -87,14 +87,17 @@ body {
     font-size: 8vw;
 }
 #level_size_4{
+    background: gray;
     left: 28vw;
     font-size: 8vw;
 }
 #level_size_5{
+    background: gray;
     left: 51vw;
     font-size: 8vw;
 }
 #level_size_6{
+    background: gray;
     left: 74vw;
     font-size: 8vw;
 }
