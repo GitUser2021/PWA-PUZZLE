@@ -51,6 +51,8 @@ function checkWin() {
                 var audio = new Audio(SOUND_WIN);
                 audio.play();
                 disable_blocks()
+                num = false // reset de la variable.
+                document.getElementById('btnHelp').style.display = 'none' // oculto el boton HELP.
                 window['div' + emptyBlock].bloque.style.display = 'block'
             } else { continue }
         } else { break }
