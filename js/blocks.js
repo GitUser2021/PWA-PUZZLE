@@ -1,41 +1,45 @@
 function start(show) {
 
     // guardo los indices de las columnas.
-    for (let i = 1, x = 1; i < (PUZZLE_SIZE * 2); i++ , x += PUZZLE_SIZE) {
-        if (i <= PUZZLE_SIZE) {
-            last_row_index.push(PUZZLE_SIZE * i)
+    for (let i = 1, x = 1; i < (puzzle_size * 2); i++ , x += puzzle_size) {
+        if (i <= puzzle_size) {
+            last_row_index.push(puzzle_size * i)
         }
-        if (x <= CANT_BLOQUES) {
+        if (x <= cant_bloques) {
             first_row_index.push(x)
         }
     }
 
+    // atributos dinamicos del div principal.
+    ref_div_main.style.width = image_size + 'px'
+    ref_div_main.style.height = image_size + 'px'
+
     // creo los divs (bloques)
-    for (let i = 1; i < (CANT_BLOQUES + 1); i++) {
+    for (let i = 1; i < (cant_bloques + 1); i++) {
         window['div_' + i] = document.createElement('div')
         window['div_' + i].id = i
-        window['div_' + i].style.width = IMAGE_SIZE / PUZZLE_SIZE + 'px'
-        window['div_' + i].style.height = IMAGE_SIZE / PUZZLE_SIZE + 'px'
+        window['div_' + i].style.width = image_size / puzzle_size + 'px'
+        window['div_' + i].style.height = image_size / puzzle_size + 'px'
         window['div_' + i].style.backgroundImage = IMAGE
-        window['div_' + i].style.backgroundSize = IMAGE_SIZE + 'px'
+        window['div_' + i].style.backgroundSize = image_size + 'px'
         ref_div_main.appendChild(window['div_' + i])
     }
     //-----------------------------------------
     // posisiono los divs en orden
-    for (let a = 0, b = 1; a < PUZZLE_SIZE; a++ , b++) {
-        for (let i = (PUZZLE_SIZE * a), x = 0; i < (PUZZLE_SIZE * b); i++ , x++) {
-            let top = IMAGE_SIZE / PUZZLE_SIZE * a * 1
-            let left = IMAGE_SIZE / PUZZLE_SIZE * x * 1
+    for (let a = 0, b = 1; a < puzzle_size; a++ , b++) {
+        for (let i = (puzzle_size * a), x = 0; i < (puzzle_size * b); i++ , x++) {
+            let top = image_size / puzzle_size * a * 1
+            let left = image_size / puzzle_size * x * 1
             push_into_object(top, left)
         }
     }
     //-----------------------------------------
 
     // agrego y posisiono la imagen a los divs
-    for (let a = 0, b = 1; a < PUZZLE_SIZE; a++ , b++) {
-        for (let i = (PUZZLE_SIZE * a), x = 0; i < (PUZZLE_SIZE * b); i++ , x++) {
-            ref_div_main.children[i].style.backgroundPositionX = IMAGE_SIZE / PUZZLE_SIZE * x * -1 + 'px'
-            ref_div_main.children[i].style.backgroundPositionY = IMAGE_SIZE / PUZZLE_SIZE * a * -1 + 'px'
+    for (let a = 0, b = 1; a < puzzle_size; a++ , b++) {
+        for (let i = (puzzle_size * a), x = 0; i < (puzzle_size * b); i++ , x++) {
+            ref_div_main.children[i].style.backgroundPositionX = image_size / puzzle_size * x * -1 + 'px'
+            ref_div_main.children[i].style.backgroundPositionY = image_size / puzzle_size * a * -1 + 'px'
         }
     }
     //-----------------------------------------
@@ -59,17 +63,17 @@ function start(show) {
 
 
     // creo los bloques.
-    for (var i = 1; i < (CANT_BLOQUES + 1); i++) {
+    for (var i = 1; i < (cant_bloques + 1); i++) {
         window['div' + i] = new Bloque
         window['div' + i].bloque = document.getElementById(i)   // aplico un div a cada nuevo bloque.
         window['div' + i].position = i // aplico las posiciones por orden del primero al ultimo.
         objArray.push(window['div' + i])
     }
 
-    ref_div_main.children[CANT_BLOQUES - 1].style.display = 'none'
+    ref_div_main.children[cant_bloques - 1].style.display = 'none'
 
     // agrego los addEventListener a los todos los bloques MENOS AL bloque vacio.
-    for (var i = 1; i < CANT_BLOQUES; i++) {
+    for (var i = 1; i < cant_bloques; i++) {
         document.getElementById(i).addEventListener('touchstart', function (e) {
             move(e.target.id)
         })
@@ -77,7 +81,7 @@ function start(show) {
 
     // coloca los bloques en sus posiciones iniciales.
     function init() {
-        for (var i = 1; i < (CANT_BLOQUES + 1); i++) {
+        for (var i = 1; i < (cant_bloques + 1); i++) {
             window['div' + i].Move()
         }
         // actualizar los status
@@ -85,9 +89,9 @@ function start(show) {
     }
 
     init()
-    if(show){
+    if (show) {
         disable_blocks()
-        window['div' + CANT_BLOQUES].bloque.style.display = 'block'
+        window['div' + cant_bloques].bloque.style.display = 'block'
     }
 }
 // inicializa todos los bloques (imagen completa),
