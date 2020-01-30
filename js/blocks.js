@@ -18,6 +18,7 @@ function start(show) {
     for (let i = 1; i < (cant_bloques + 1); i++) {
         window['div_' + i] = document.createElement('div')
         window['div_' + i].id = i
+        window['div_' + i].className = 'bloque'
         window['div_' + i].style.width = image_size / puzzle_size + 'px'
         window['div_' + i].style.height = image_size / puzzle_size + 'px'
         window['div_' + i].style.backgroundImage = IMAGE
