@@ -44,9 +44,10 @@ body {
     font-variant: small-caps;
     font-size: 7vw;
     box-shadow: 1px 1px 10px 3px whitesmoke;
+    outline: none;
 }
 
-#btnNewGame:hover {
+#btnNewGame:hover,#btnHelp:hover {
     box-shadow: 1px 1px 10px 5px whitesmoke;
 }
 
@@ -74,32 +75,28 @@ body {
     top: 120vw;
     border-radius: 5vw;
     box-shadow: 1px 1px 10px 5px whitesmoke;
+    font-size: 8vw;
 }
 
 #level{
     width: 50vw;
     top: 105vw;
     left: 24vw;
-    font-size: 8vw;
 }
 #level_size_3{
     left: 5vw;
-    font-size: 8vw;
 }
 #level_size_4{
     background: gray;
     left: 28vw;
-    font-size: 8vw;
 }
 #level_size_5{
     background: gray;
     left: 51vw;
-    font-size: 8vw;
 }
 #level_size_6{
     background: gray;
     left: 74vw;
-    font-size: 8vw;
 }
 
 @media (orientation:landscape){
