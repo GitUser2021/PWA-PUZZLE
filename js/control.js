@@ -78,3 +78,101 @@ function disable_blocks() {
         item.status = false
     });
 }
+
+// slide para las imagenes de los puzzles.
+function slide(direction) {
+    // detecto la imagen que esta al frente.
+    // if(getComputedStyle(ref_image_1).zIndex == 1)image = 1
+    // if(getComputedStyle(ref_image_2).zIndex == 1)image = 2
+    // if(getComputedStyle(ref_image_3).zIndex == 1)image = 3
+    get_active_image()
+
+    if (direction == 'left') { // slide left.
+        switch (image) {
+            case 1:
+                image1()
+                break
+
+            case 2:
+                image2()
+                break
+
+            case 3:
+                image3()
+                break
+        }
+    } else { // slide right.
+        switch (image) {
+            case 1:
+                image3()
+                break
+
+            case 2:
+                image1()
+                break
+
+            case 3:
+                image2()
+                break
+        }
+    }
+
+    function image1() {
+        set_image_position(ref_image_1, 1)
+        set_image_position(ref_image_2, 2)
+        set_image_position(ref_image_3, 3)
+    }
+
+    function image2() {
+        set_image_position(ref_image_2, 1)
+        set_image_position(ref_image_1, 3)
+        set_image_position(ref_image_3, 2)
+    }
+
+    function image3() {
+        set_image_position(ref_image_3, 1)
+        set_image_position(ref_image_1, 2)
+        set_image_position(ref_image_2, 3)
+    }
+
+    function set_image_position(image, position) {
+        switch (position) {
+            case 1:
+                image.style.top = '35vw'
+                image.style.left = '8vw'
+                image.style.zIndex = '0'
+                image.style.width = '40vw'
+                break
+            case 2:
+                image.style.top = '35vw'
+                image.style.left = '52vw'
+                image.style.zIndex = '0'
+                image.style.width = '40vw'
+                break
+            case 3:
+                image.style.top = '20vw'
+                image.style.left = '15vw'
+                image.style.zIndex = '1'
+                image.style.width = '70vw'
+                break
+        }
+    }
+}
+
+function get_active_image() {
+    // detecto la imagen que esta al frente.
+    if (getComputedStyle(ref_image_1).zIndex == 1) { image = 1; return ref_image_1.src }
+    if (getComputedStyle(ref_image_2).zIndex == 1) { image = 2; return ref_image_2.src }
+    if (getComputedStyle(ref_image_3).zIndex == 1) { image = 3; return ref_image_3.src }
+}
+
+// oculta las imagenes de los puzzles.
+function hide_puzzles(hide) {
+    hide ? display = 'none' : display = 'block'
+    ref_image_1.style.display = display
+    ref_image_2.style.display = display
+    ref_image_3.style.display = display
+    ref_left_arrow.style.display = display
+    ref_right_arrow.style.display = display
+    ref_puzzles.style.display = display
+}

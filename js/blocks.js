@@ -100,4 +100,4 @@ function start(show) {
 }
 // inicializa todos los bloques (imagen completa),
 // pero dejando todos deshabilitados para que no se puedan mover.
-start('show')
+// start('show')

@@ -1,4 +1,4 @@
-const IMAGE = 'url(css/images/tigre.jpeg)'
+let IMAGE = 'url(css/images/dog.jpg)'
 const SOUND_WIN = 'css/sounds/clap.mp3'
 
 let image_size = 360
@@ -11,11 +11,25 @@ let last_row_index = []
 let first_row_index = []
 
 let ref_div_main = document.getElementById('main')
+let ref_puzzles = document.getElementById('puzzles')
 let ref_level_size_3 = document.getElementById('level_size_3')
 let ref_level_size_4 = document.getElementById('level_size_4')
 let ref_level_size_5 = document.getElementById('level_size_5')
 let ref_level_size_6 = document.getElementById('level_size_6')
 
+let ref_image_1 = document.getElementById('image1')
+let ref_image_2 = document.getElementById('image2')
+let ref_image_3 = document.getElementById('image3')
+let ref_left_arrow = document.getElementById('left_arrow')
+let ref_right_arrow = document.getElementById('right_arrow')
+
+
+ref_left_arrow.addEventListener('click', (e) => {
+    slide('left')
+})
+ref_right_arrow.addEventListener('click', (e) => {
+    slide('right')
+})
 
 // el tamaño de la imagen es el tamaño de pantalla.
 if (window.screen.orientation.angle == 0) {
@@ -24,10 +38,8 @@ if (window.screen.orientation.angle == 0) {
     } else {
         image_size = window.innerWidth
     }
-    // image_size = window.screen.width
 } else {
     image_size = window.innerHeight
-    // image_size = window.screen.height
 }
 
 // mostrar imagen como ayuda.
@@ -49,6 +61,13 @@ function show_image(show) {
         })
     }
 }
+
+// boton puzzles.
+ref_puzzles.addEventListener('click', () => {
+    reset()
+    hide_puzzles(false)
+    move_puzzle_option('up')
+})
 
 // boton New Game.
 document.getElementById('btnNewGame').addEventListener('click', () => {
@@ -83,24 +102,42 @@ document.getElementById('level_size_6').addEventListener('click', () => {
     pregunta(6)
 })
 
+
+
+
 // juego nuevo.
 function new_game() {
     reset()
+    hide_puzzles(true)
+    IMAGE = get_active_image()
+    IMAGE = 'url(' + IMAGE.slice(IMAGE.indexOf('css')) + ')'
     start()
     setTimeout(() => {
         scramble(500)
     }, 0);
 }
 
-
-
 // seleccion de nivel.
 function level(size) {
     dim_level_item(size)
     reset()
+    hide_puzzles(true)
+    move_puzzle_option('down')
+    IMAGE = get_active_image()
+    IMAGE = 'url(' + IMAGE.slice(IMAGE.indexOf('css')) + ')'
     puzzle_size = size
     cant_bloques = puzzle_size * puzzle_size
     start('show') // show para que solo muestre la imagen, y no se creen los bloques y habiliten los movimientos.
+}
+
+// muevo de lugar la opcion puzzles.
+function move_puzzle_option(position) {
+    if (position == 'down') {
+        ref_puzzles.style.display = 'block'
+        ref_puzzles.style.top = '155vw'
+    } else {
+        ref_puzzles.style.top = '4vw'
+    }
 }
 
 // dim level option
@@ -149,8 +186,12 @@ function pregunta(size, newGame = false) {
             confirmButtonText: 'Ok'
         }).then((result) => {
             if (result.value) {
-                level(size)
+                // level(size)
+                hide_puzzles(false)
+                move_puzzle_option('up')
+                reset()
                 num = false // reset de la variable.
+                document.getElementById('btnHelp').style.display = 'none' // oculto el boton HELP.
             }
         })
     } else {

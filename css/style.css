@@ -19,6 +19,42 @@ body {
     background: #444;
 }
 
+img{
+    position: absolute;
+    width: 40vw;
+    border-radius: 3vw;
+    transition: all 250ms;
+}
+
+#image1{
+    top: 20vw;
+    left: 15vw;
+    width: 70vw;
+    z-index: 1;
+}
+#image2{
+    top: 35vw;
+    left: 8vw;
+}
+#image3{
+    top: 35vw;
+    left: 52vw;
+}
+#left_arrow{
+    width: 10vw;
+    top: 50vw;
+    left: 15vw;
+    z-index: 2;
+}
+#right_arrow{
+    width: 10vw;
+    top: 50vw;
+    left: 75vw;
+    z-index: 2;
+}
+
+
+
 #main {
     margin: 0;
     padding: 0;
@@ -29,7 +65,7 @@ body {
 .bloque {
     border: 1px solid black;
     position: absolute;
-    transition: all 250ms;
+    transition: all 500ms;
 }
 
 #btnNewGame,#btnHelp {
@@ -57,8 +93,10 @@ body {
 #btnHelp {
     top: 155vw;
     transition: all 500ms;
+    display: none;
     }
 
+#puzzles,    
 #level,
 #level_size_3,
 #level_size_4,
@@ -75,6 +113,13 @@ body {
     border-radius: 5vw;
     box-shadow: 1px 1px 10px 5px whitesmoke;
     font-size: 8vw;
+}
+
+#puzzles{
+    width: 50vw;
+    top: 4vw;
+    left: 24vw;
+    transition: all 250ms;
 }
 
 #level{
