@@ -62,7 +62,6 @@ function start(show) {
             }
     }
 
-
     // creo los bloques.
     for (var i = 1; i < (cant_bloques + 1); i++) {
         window['div' + i] = new Bloque
@@ -73,9 +72,21 @@ function start(show) {
 
     ref_div_main.children[cant_bloques - 1].style.display = 'none'
 
+    // deteccion de dispositivo tactil.
+    let event = 'mousedown'
+    function is_touch_enabled() {
+        return ('ontouchstart' in window) ||
+            (navigator.maxTouchPoints > 0) ||
+            (navigator.msMaxTouchPoints > 0);
+    }
+
+    // cambio el evento si es dispositivo tactil.
+    is_touch_enabled() ? event = 'touchstart' : event
+
+
     // agrego los addEventListener a los todos los bloques MENOS AL bloque vacio.
     for (var i = 1; i < cant_bloques; i++) {
-        document.getElementById(i).addEventListener('touchstart', function (e) {
+        document.getElementById(i).addEventListener(event, function (e) {
             move(e.target.id)
         })
     }
@@ -98,6 +109,3 @@ function start(show) {
         document.getElementById('btnHelp').style.display = 'block' // muestro el boton HELP.
     }
 }
-// inicializa todos los bloques (imagen completa),
-// pero dejando todos deshabilitados para que no se puedan mover.
-// start('show')

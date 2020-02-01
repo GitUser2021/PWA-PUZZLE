@@ -1,9 +1,10 @@
 let IMAGE = 'url(css/images/dog.jpg)'
 const SOUND_WIN = 'css/sounds/clap.mp3'
 
-let image_size = 360
 let puzzle_size = 3
+
 let cant_bloques = puzzle_size * puzzle_size
+let device_width
 
 let blocksPositions = {} // obj para almacenar las posisiones de los bloques.
 let objArray = [] // un array con todos los bloques para usar en la funcion update_status()
@@ -32,14 +33,19 @@ ref_right_arrow.addEventListener('click', (e) => {
 })
 
 // el tamaño de la imagen es el tamaño de pantalla.
+device_width = window.innerWidth
 if (window.screen.orientation.angle == 0) {
-    if (window.innerWidth >= 800) {
-        image_size = 500
-    } else {
-        image_size = window.innerWidth
-    }
+    if (device_width >= 1280 && device_width <= 1920) { image_size = device_width * 0.4 }
+    if (device_width >= 1024 && device_width <= 1279) { image_size = device_width * 0.9 }
+    if (device_width >= 800 && device_width <= 1023) { image_size = device_width * 0.7 }
+    if (device_width >= 360 && device_width <= 799) { image_size = device_width }
+    if (device_width >= 320 && device_width <= 359) { image_size = device_width }
 } else {
-    image_size = window.innerHeight
+    if (device_width >= 1280 && device_width <= 1920) { image_size = device_width * 0.6 }
+    if (device_width >= 1024 && device_width <= 1279) { image_size = device_width * 0.6 }
+    if (device_width >= 800 && device_width <= 1023) { image_size = device_width * 0.7 }
+    if (device_width >= 360 && device_width <= 799) { image_size = device_width * 0.5 }
+    if (device_width >= 320 && device_width <= 359) { image_size = device_width }
 }
 
 // mostrar imagen como ayuda.
@@ -102,12 +108,10 @@ document.getElementById('level_size_6').addEventListener('click', () => {
     pregunta(6)
 })
 
-
-
-
 // juego nuevo.
 function new_game() {
     reset()
+    ref_div_main.style.display = 'block'
     hide_puzzles(true)
     IMAGE = get_active_image()
     IMAGE = 'url(' + IMAGE.slice(IMAGE.indexOf('css')) + ')'
@@ -121,6 +125,7 @@ function new_game() {
 function level(size) {
     dim_level_item(size)
     reset()
+    ref_div_main.style.display = 'block'
     hide_puzzles(true)
     move_puzzle_option('down')
     IMAGE = get_active_image()
@@ -134,9 +139,11 @@ function level(size) {
 function move_puzzle_option(position) {
     if (position == 'down') {
         ref_puzzles.style.display = 'block'
-        ref_puzzles.style.top = '155vw'
+        ref_puzzles.classList.remove('puzzles')
+        ref_puzzles.classList.add('puzzles-bottom')
     } else {
-        ref_puzzles.style.top = '4vw'
+        ref_puzzles.classList.remove('puzzles-bottom')
+        ref_puzzles.classList.add('puzzles')
     }
 }
 
@@ -186,7 +193,6 @@ function pregunta(size, newGame = false) {
             confirmButtonText: 'Ok'
         }).then((result) => {
             if (result.value) {
-                // level(size)
                 hide_puzzles(false)
                 move_puzzle_option('up')
                 reset()
