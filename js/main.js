@@ -216,6 +216,7 @@ function pregunta(size, newGame = false) {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Ok'
         }).then((result) => {
+            document.lastChild.classList.add('no-select')
             if (result.value) {
                 hide_puzzles(false)
                 move_puzzle_option('up')
@@ -225,6 +226,7 @@ function pregunta(size, newGame = false) {
             }
         })
     } else {
+        document.lastChild.classList.add('no-select')
         if (newGame) {
             new_game()
             return
@@ -232,3 +234,5 @@ function pregunta(size, newGame = false) {
         level(size)
     }
 }
+
+
