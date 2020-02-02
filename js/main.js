@@ -35,14 +35,6 @@ let ref_image_3 = document.getElementById('image3')
 let ref_left_arrow = document.getElementById('left_arrow')
 let ref_right_arrow = document.getElementById('right_arrow')
 
-
-ref_left_arrow.addEventListener('click', (e) => {
-    slide('left')
-})
-ref_right_arrow.addEventListener('click', (e) => {
-    slide('right')
-})
-
 // el tamaño de la imagen es el tamaño de pantalla.
 device_width = window.innerWidth
 if (window.screen.orientation.angle == 0) {
@@ -79,43 +71,64 @@ function show_image(show) {
     }
 }
 
+// deteccion de dispositivo tactil.
+let event = 'mousedown'
+let event_2 = 'mouseup'
+function is_touch_enabled() {
+    return ('ontouchstart' in window) ||
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0);
+}
+
+// cambio el evento si es dispositivo tactil.
+is_touch_enabled() ? event = 'touchstart' : event
+is_touch_enabled() ? event_2 = 'touchend' : event_2
+
+
+ref_left_arrow.addEventListener(event, (e) => {
+    slide('left')
+})
+ref_right_arrow.addEventListener(event, (e) => {
+    slide('right')
+})
+
 // boton puzzles.
-ref_puzzles.addEventListener('click', () => {
+ref_puzzles.addEventListener(event, () => {
     reset()
     hide_puzzles(false)
     move_puzzle_option('up')
 })
 
 // boton New Game.
-document.getElementById('btnNewGame').addEventListener('click', () => {
+document.getElementById('btnNewGame').addEventListener(event, () => {
     pregunta(puzzle_size, true)
 })
 
 // boton Help.
-document.getElementById('btnHelp').addEventListener('touchstart', () => {
+document.getElementById('btnHelp').addEventListener(event, () => {
     show_image(true)
 })
-document.getElementById('btnHelp').addEventListener('touchend', () => {
+document.getElementById('btnHelp').addEventListener(event_2, () => {
     show_image(false)
 })
 
 // boton 3x3
-document.getElementById('level_size_3').addEventListener('click', () => {
+document.getElementById('level_size_3').addEventListener(event, () => {
     pregunta(3)
 })
 
 // boton 4x4
-document.getElementById('level_size_4').addEventListener('click', () => {
+document.getElementById('level_size_4').addEventListener(event, () => {
     pregunta(4)
 })
 
 // boton 5x5
-document.getElementById('level_size_5').addEventListener('click', () => {
+document.getElementById('level_size_5').addEventListener(event, () => {
     pregunta(5)
 })
 
 // boton 6x6
-document.getElementById('level_size_6').addEventListener('click', () => {
+document.getElementById('level_size_6').addEventListener(event, () => {
     pregunta(6)
 })
 

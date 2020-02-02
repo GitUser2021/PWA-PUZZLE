@@ -72,18 +72,6 @@ function start(show) {
 
     ref_div_main.children[cant_bloques - 1].style.display = 'none'
 
-    // deteccion de dispositivo tactil.
-    let event = 'mousedown'
-    function is_touch_enabled() {
-        return ('ontouchstart' in window) ||
-            (navigator.maxTouchPoints > 0) ||
-            (navigator.msMaxTouchPoints > 0);
-    }
-
-    // cambio el evento si es dispositivo tactil.
-    is_touch_enabled() ? event = 'touchstart' : event
-
-
     // agrego los addEventListener a los todos los bloques MENOS AL bloque vacio.
     for (var i = 1; i < cant_bloques; i++) {
         document.getElementById(i).addEventListener(event, function (e) {
