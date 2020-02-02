@@ -99,10 +99,10 @@ ref_puzzles.addEventListener(event, () => {
     move_puzzle_option('up')
 },{passive: true})
 
-// boton New Game.
-document.getElementById('btnNewGame').addEventListener(event, () => {
+// boton New Game. // para que el SweetAlert no se cierre rapido, dejar los eventos en 'click' en vez de touchstar.
+document.getElementById('btnNewGame').addEventListener('click', () => {
     pregunta(puzzle_size, true)
-},{passive: true})
+})
 
 // boton Help.
 document.getElementById('btnHelp').addEventListener(event, () => {
@@ -113,24 +113,24 @@ document.getElementById('btnHelp').addEventListener(event_2, () => {
 },{passive: true})
 
 // boton 3x3
-document.getElementById('level_size_3').addEventListener(event, () => {
+document.getElementById('level_size_3').addEventListener('click', () => {
     pregunta(3)
-},{passive: true})
+})
 
 // boton 4x4
-document.getElementById('level_size_4').addEventListener(event, () => {
+document.getElementById('level_size_4').addEventListener('click', () => {
     pregunta(4)
-},{passive: true})
+})
 
 // boton 5x5
-document.getElementById('level_size_5').addEventListener(event, () => {
+document.getElementById('level_size_5').addEventListener('click', () => {
     pregunta(5)
-},{passive: true})
+})
 
 // boton 6x6
-document.getElementById('level_size_6').addEventListener(event, () => {
+document.getElementById('level_size_6').addEventListener('click', () => {
     pregunta(6)
-},{passive: true})
+})
 
 // juego nuevo.
 function new_game() {
