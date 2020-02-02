@@ -8,11 +8,17 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="Description" content="slide puzzle">
+    <meta name="theme-color" content="#514757"/>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <title>Puzzle</title>
 </head>
 
 <body>
+    <noscript>
+        <h1>Javascript esta deshabilitado</h1>
+    </noscript>
     <div id="main"></div>
     <img id="left_arrow" src="css/images/left_arrow.png">
     <img id="right_arrow" src="css/images/right_arrow.png">
@@ -28,6 +34,8 @@
     <button id="btnNewGame" class="no-select">start game</button>
     <button id="btnHelp" class="no-select">help</button>
 </body>
+
+<script src="sw.js"></script>
 <script src="js/main.js"></script>
 <script src="js/control.js"></script>
 <script src="js/blocks.js"></script>
