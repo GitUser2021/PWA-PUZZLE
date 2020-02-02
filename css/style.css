@@ -79,7 +79,7 @@ img{
     height: 15vw;
     width: 45vw;
     background: linear-gradient(30deg, gray, white);
-    color: darkolivegreen;
+    color: darkblue;
     font-weight: bold;
     font-variant: small-caps;
     font-size: 7vw;
@@ -107,7 +107,7 @@ img{
 #level_size_5,
 #level_size_6{
     background: salmon;
-    color: darkolivegreen;
+    color: darkblue;
     position: absolute;
     width: 20vw;
     height: 10vw;
