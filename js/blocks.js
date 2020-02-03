@@ -9,10 +9,12 @@ function start(show) {
             first_row_index.push(x)
         }
     }
+    //---------------------------------------------------------------------------------------------------------------------
 
     // atributos dinamicos del div principal.
     ref_div_main.style.width = image_size + 'px'
     ref_div_main.style.height = image_size + 'px'
+    //---------------------------------------------------------------------------------------------------------------------
 
     // creo los divs (bloques)
     for (let i = 1; i < (cant_bloques + 1); i++) {
@@ -25,7 +27,8 @@ function start(show) {
         window['div_' + i].style.backgroundSize = image_size + 'px'
         ref_div_main.appendChild(window['div_' + i])
     }
-    //-----------------------------------------
+    //---------------------------------------------------------------------------------------------------------------------
+
     // posisiono los divs en orden
     for (let a = 0, b = 1; a < puzzle_size; a++ , b++) {
         for (let i = (puzzle_size * a), x = 0; i < (puzzle_size * b); i++ , x++) {
@@ -34,7 +37,7 @@ function start(show) {
             push_into_object(top, left)
         }
     }
-    //-----------------------------------------
+    //---------------------------------------------------------------------------------------------------------------------
 
     // agrego y posisiono la imagen a los divs
     for (let a = 0, b = 1; a < puzzle_size; a++ , b++) {
@@ -43,12 +46,15 @@ function start(show) {
             ref_div_main.children[i].style.backgroundPositionY = image_size / puzzle_size * a * -1 + 'px'
         }
     }
-    //-----------------------------------------
+    //---------------------------------------------------------------------------------------------------------------------
+    
+    // pusheo dentro del obj las posiciones de los bloques.
     function push_into_object(top, left) {
         if (typeof (i) === 'undefined') { i = 1 }
         blocksPositions[i] = { top: top, left: left }
         i++
     }
+    //---------------------------------------------------------------------------------------------------------------------
 
     // constructor de bloque.
     function Bloque() {
@@ -61,6 +67,7 @@ function start(show) {
                 this.bloque.style.left = blocksPositions[this.position].left + 'px'
             }
     }
+    //---------------------------------------------------------------------------------------------------------------------
 
     // creo los bloques.
     for (var i = 1; i < (cant_bloques + 1); i++) {
@@ -69,15 +76,19 @@ function start(show) {
         window['div' + i].position = i // aplico las posiciones por orden del primero al ultimo.
         objArray.push(window['div' + i])
     }
+    //---------------------------------------------------------------------------------------------------------------------
 
+    // oculto el ultimo bloque (bloque vacio).
     ref_div_main.children[cant_bloques - 1].style.display = 'none'
-
+    //---------------------------------------------------------------------------------------------------------------------
+    
     // agrego los addEventListener a los todos los bloques MENOS AL bloque vacio.
     for (var i = 1; i < cant_bloques; i++) {
-        document.getElementById(i).addEventListener(event, function (e) {
+        document.getElementById(i).addEventListener(down, function (e) {
             move(e.target.id)
         })
     }
+    //---------------------------------------------------------------------------------------------------------------------
 
     // coloca los bloques en sus posiciones iniciales.
     function init() {
@@ -87,6 +98,7 @@ function start(show) {
         // actualizar los status
         update_status(window['div' + objArray.length].position)
     }
+    //---------------------------------------------------------------------------------------------------------------------
 
     init()
     if (show) {

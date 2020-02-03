@@ -1,3 +1,4 @@
+// registro el sw.
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js')
         .then(function (reg) {
@@ -7,11 +8,12 @@ if ('serviceWorker' in navigator) {
             console.log('Error registrando el Service Worker', err);
         });
 }
-
+//---------------------------------------------------------------------------------------------------------------------
 
 let IMAGE = 'url(css/images/dog.jpg)'
 const SOUND_WIN = 'css/sounds/clap.mp3'
-
+const COLOR_ENABLED = 'salmon'
+const COLOR_DISABLED = 'gray'
 let puzzle_size = 3
 
 let cant_bloques = puzzle_size * puzzle_size
@@ -22,6 +24,7 @@ let objArray = [] // un array con todos los bloques para usar en la funcion upda
 let last_row_index = []
 let first_row_index = []
 
+// referencias a elementos.
 let ref_div_main = document.getElementById('main')
 let ref_puzzles = document.getElementById('puzzles')
 let ref_level_size_3 = document.getElementById('level_size_3')
@@ -34,6 +37,7 @@ let ref_image_2 = document.getElementById('image2')
 let ref_image_3 = document.getElementById('image3')
 let ref_left_arrow = document.getElementById('left_arrow')
 let ref_right_arrow = document.getElementById('right_arrow')
+//---------------------------------------------------------------------------------------------------------------------
 
 // el tamaño de la imagen es el tamaño de pantalla.
 device_width = window.innerWidth
@@ -50,6 +54,7 @@ if (window.screen.orientation.angle == 0) {
     if (device_width >= 360 && device_width <= 799) { image_size = device_width * 0.5 }
     if (device_width >= 320 && device_width <= 359) { image_size = device_width }
 }
+//---------------------------------------------------------------------------------------------------------------------
 
 // mostrar imagen como ayuda.
 function show_image(show) {
@@ -70,10 +75,11 @@ function show_image(show) {
         })
     }
 }
+//---------------------------------------------------------------------------------------------------------------------
 
 // deteccion de dispositivo tactil.
-let event = 'mousedown'
-let event_2 = 'mouseup'
+let down = 'mousedown'
+let up = 'mouseup'
 function is_touch_enabled() {
     return ('ontouchstart' in window) ||
         (navigator.maxTouchPoints > 0) ||
@@ -81,19 +87,20 @@ function is_touch_enabled() {
 }
 
 // cambio el evento si es dispositivo tactil.
-is_touch_enabled() ? event = 'touchstart' : event
-is_touch_enabled() ? event_2 = 'touchend' : event_2
+is_touch_enabled() ? down = 'touchstart' : down
+is_touch_enabled() ? up = 'touchend' : up
+//---------------------------------------------------------------------------------------------------------------------
 
-
-ref_left_arrow.addEventListener(event, (e) => {
+// listeners.
+ref_left_arrow.addEventListener(down, (e) => {
     slide('left')
 },{passive: true})
-ref_right_arrow.addEventListener(event, (e) => {
+ref_right_arrow.addEventListener(down, (e) => {
     slide('right')
 },{passive: true})
 
 // boton puzzles.
-ref_puzzles.addEventListener(event, () => {
+ref_puzzles.addEventListener(down, () => {
     reset()
     hide_puzzles(false)
     move_puzzle_option('up')
@@ -105,10 +112,10 @@ document.getElementById('btnNewGame').addEventListener('click', () => {
 })
 
 // boton Help.
-document.getElementById('btnHelp').addEventListener(event, () => {
+document.getElementById('btnHelp').addEventListener(down, () => {
     show_image(true)
 },{passive: true})
-document.getElementById('btnHelp').addEventListener(event_2, () => {
+document.getElementById('btnHelp').addEventListener(up, () => {
     show_image(false)
 },{passive: true})
 
@@ -131,6 +138,7 @@ document.getElementById('level_size_5').addEventListener('click', () => {
 document.getElementById('level_size_6').addEventListener('click', () => {
     pregunta(6)
 })
+//---------------------------------------------------------------------------------------------------------------------
 
 // juego nuevo.
 function new_game() {
@@ -144,6 +152,7 @@ function new_game() {
         scramble(500)
     }, 0);
 }
+//---------------------------------------------------------------------------------------------------------------------
 
 // seleccion de nivel.
 function level(size) {
@@ -158,6 +167,7 @@ function level(size) {
     cant_bloques = puzzle_size * puzzle_size
     start('show') // show para que solo muestre la imagen, y no se creen los bloques y habiliten los movimientos.
 }
+//---------------------------------------------------------------------------------------------------------------------
 
 // muevo de lugar la opcion puzzles.
 function move_puzzle_option(position) {
@@ -170,37 +180,39 @@ function move_puzzle_option(position) {
         ref_puzzles.classList.add('puzzles')
     }
 }
+//---------------------------------------------------------------------------------------------------------------------
 
 // dim level option
 // cambia el color de los selectores de nivel, menos el clickeado.
 function dim_level_item(level) {
     switch (level) {
         case 3:
-            ref_level_size_3.style.background = 'salmon'
-            ref_level_size_4.style.background = 'gray'
-            ref_level_size_5.style.background = 'gray'
-            ref_level_size_6.style.background = 'gray'
+            ref_level_size_3.style.background = COLOR_ENABLED
+            ref_level_size_4.style.background = COLOR_DISABLED
+            ref_level_size_5.style.background = COLOR_DISABLED
+            ref_level_size_6.style.background = COLOR_DISABLED
             break
         case 4:
-            ref_level_size_4.style.background = 'salmon'
-            ref_level_size_3.style.background = 'gray'
-            ref_level_size_5.style.background = 'gray'
-            ref_level_size_6.style.background = 'gray'
+            ref_level_size_4.style.background = COLOR_ENABLED
+            ref_level_size_3.style.background = COLOR_DISABLED
+            ref_level_size_5.style.background = COLOR_DISABLED
+            ref_level_size_6.style.background = COLOR_DISABLED
             break
         case 5:
-            ref_level_size_5.style.background = 'salmon'
-            ref_level_size_3.style.background = 'gray'
-            ref_level_size_4.style.background = 'gray'
-            ref_level_size_6.style.background = 'gray'
+            ref_level_size_5.style.background = COLOR_ENABLED
+            ref_level_size_3.style.background = COLOR_DISABLED
+            ref_level_size_4.style.background = COLOR_DISABLED
+            ref_level_size_6.style.background = COLOR_DISABLED
             break
         case 6:
-            ref_level_size_6.style.background = 'salmon'
-            ref_level_size_3.style.background = 'gray'
-            ref_level_size_4.style.background = 'gray'
-            ref_level_size_5.style.background = 'gray'
+            ref_level_size_6.style.background = COLOR_ENABLED
+            ref_level_size_3.style.background = COLOR_DISABLED
+            ref_level_size_4.style.background = COLOR_DISABLED
+            ref_level_size_5.style.background = COLOR_DISABLED
             break
     }
 }
+//---------------------------------------------------------------------------------------------------------------------
 
 // SweetAlert2 pregunta.
 function pregunta(size, newGame = false) {

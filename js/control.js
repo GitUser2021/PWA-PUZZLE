@@ -25,6 +25,8 @@ function update_status() {
         return obj
     }
 }
+//------------------------------------------------------------------------------------------------------------------------
+
 
 // al clickear un bloque, se gestiona el cambio de posicion entre el bloque clickeado y el lugar vacio.
 function move(div, check_Win = true) {
@@ -41,7 +43,9 @@ function move(div, check_Win = true) {
         if (check_Win) { checkWin() }
     }
 }
+//------------------------------------------------------------------------------------------------------------------------
 
+// verificacion si el puzzle esta resuelto.
 function checkWin() {
     for (var i = 1; i < cant_bloques; i++) {
         if (window['div' + i].position == i) {
@@ -58,6 +62,8 @@ function checkWin() {
         } else { break }
     }
 }
+//------------------------------------------------------------------------------------------------------------------------
+
 
 // reset total elimina los divs y reseteo las variables.
 function reset() {
@@ -72,13 +78,17 @@ function reset() {
     last_row_index = []
     ref_div_main.style.display = 'none'
 }
+//------------------------------------------------------------------------------------------------------------------------
 
+// deshabilita todos los bloques.
 function disable_blocks() {
     emptyBlock = window['div' + cant_bloques].position
     objArray.forEach(function (item, key) {
         item.status = false
     });
 }
+//------------------------------------------------------------------------------------------------------------------------
+
 
 // slide para las imagenes de los puzzles.
 function slide(direction) {
@@ -128,13 +138,17 @@ function slide(direction) {
         }
     }
 }
+//------------------------------------------------------------------------------------------------------------------------
 
+// obtengo la imagen en primer plano.
 function get_active_image() {
     // detecto la imagen que esta al frente.
     if (getComputedStyle(ref_image_1).zIndex == 1) { image = 1; return ref_image_1.src }
     if (getComputedStyle(ref_image_2).zIndex == 1) { image = 2; return ref_image_2.src }
     if (getComputedStyle(ref_image_3).zIndex == 1) { image = 3; return ref_image_3.src }
 }
+//------------------------------------------------------------------------------------------------------------------------
+
 
 // oculta las imagenes de los puzzles.
 function hide_puzzles(hide) {

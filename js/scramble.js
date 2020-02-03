@@ -11,6 +11,8 @@ function scramble(xTimes) {
         }
     } while (window['div' + cant_bloques].position != cant_bloques)  // se repite el scramble hasta que el bloque vacio caiga en la ultima posicion.
 }
+//------------------------------------------------------------------------------------------------------------------------
+
 
 // pusheo en el array las posisiones de los bloques con status true.
 function pushActiveBlocks() {
@@ -23,6 +25,8 @@ function pushActiveBlocks() {
         }
     }
 }
+//------------------------------------------------------------------------------------------------------------------------
+
 
 // genero un numero random entre 0 y max la cant. de items en el array de bloques activos.
 // que serian los bloques con status true y son los que estan habilitados para moverse.
