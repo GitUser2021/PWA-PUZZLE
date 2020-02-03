@@ -1,6 +1,4 @@
-console.log('sw.js loaded') 
-
-const version = "0.0.1";
+const version = "1.0.0";
 const static_cacheName = `static-v-${version}`
 let cachex = [
     "/",
@@ -20,42 +18,40 @@ let cachex = [
 
 self.addEventListener('install', e => {
     console.log('installing...')
-  let cache = caches.open(static_cacheName)
-  .then(cache => cache.addAll(cachex))
+    let cache = caches.open(static_cacheName)
+        .then(cache => cache.addAll(cachex))
     e.waitUntil(cache)
     self.skipWaiting()
 })
 
 self.addEventListener('activate', event => {
-        console.log('activate....')
-let response = caches.keys()
-.then(keys =>{
-    keys.forEach(key =>{
-        if(key != static_cacheName && key.includes('static')){
-           return caches.delete(key)
-        }
-    })
+    console.log('activate....')
+    let response = caches.keys()
+        .then(keys => {
+            keys.forEach(key => {
+                if (key != static_cacheName && key.includes('static')) {
+                    return caches.delete(key)
+                }
+            })
+        })
+    event.waitUntil(response)
 })
-        event.waitUntil(response)
-})
-
-
 
 self.addEventListener('fetch', event => {
-console.log('fetch..')
+    console.log('fetch..')
 
-let response = caches.match(event.request)
-    .then(res=>{
-        if(res){
-            return res
-        }else{
-            fetch(event.request)
-            .then(res=>{
-                caches.open(static_cacheName)
-                .then( cache => cache.put(event.request,res) )
-            })
-            return fetch(event.request)
-        }
-    })
-event.respondWith(response)
+    let response = caches.match(event.request)
+        .then(res => {
+            if (res) {
+                return res
+            } else {
+                fetch(event.request)
+                    .then(res => {
+                        caches.open(static_cacheName)
+                            .then(cache => cache.put(event.request, res))
+                    })
+                return fetch(event.request)
+            }
+        })
+    event.respondWith(response)
 })
