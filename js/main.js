@@ -1,6 +1,6 @@
 // registro el sw.
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
+    navigator.serviceWorker.register('/PWA-Slide-Puzzle/sw.js')
         .then(function (reg) {
             console.log('Service Worker registrado Exitósamente', reg);
         })
